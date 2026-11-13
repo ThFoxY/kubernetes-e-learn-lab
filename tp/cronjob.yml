@@ -1,0 +1,16 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: date
+spec:
+  schedule: "*/5 * * * *"
+  timeZone: Europe/Paris
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: cronjob
+              image: ubuntu:latest
+              command: ["date"]
+          restartPolicy: OnFailure

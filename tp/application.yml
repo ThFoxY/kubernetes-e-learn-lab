@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mon-application
+spec:
+  selector:
+    matchLabels:
+      app: mon-application
+  template:
+    metadata:
+      labels:
+        app: mon-application
+    spec:
+      # https://www.vcluster.com/blog/how-to-set-up-kubernetes-requests-and-limits
+      # https://medium.com/@prayag-sangode/day-27-resource-requests-and-limits-in-kubernetes-e3bad280d68d
+      containers:
+        - name: nginx
+          image: nginx:1.27.1-alpine
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "32Mi"
+            limits:
+              cpu: "100m"
+              memory: "64Mi"
