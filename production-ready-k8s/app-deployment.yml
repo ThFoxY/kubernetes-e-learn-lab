@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microsvc-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: microsvc
+  template:
+    metadata:
+      labels:
+        app: microsvc
+    spec:
+      containers:
+        - name: microsvc-container
+          image: paulbouwer/hello-kubernetes:1.10
+          ports:
+            - containerPort: 8080
